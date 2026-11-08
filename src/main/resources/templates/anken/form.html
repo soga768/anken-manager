@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>案件登録</title>
+</head>
+<body>
+<h1>案件登録</h1>
+<form th:action="@{/ankens}" th:object="${anken}" method="post">
+    <p>
+        案件名:
+        <input type="text" th:field="*{name}">
+    </p>
+    <p>
+        顧客:
+        <select th:field="*{customer.id}">
+            <option th:each="c : ${customers}"
+                    th:value="${c.id}"
+                    th:text="${c.name}"></option>
+        </select>
+    </p>
+    <p>
+        ステータス:
+        <select th:field="*{status}">
+            <option value="商談中">商談中</option>
+            <option value="受注">受注</option>
+            <option value="失注">失注</option>
+        </select>
+    </p>
+    <p>
+        <button type="submit">登録</button>
+        <a th:href="@{/ankens}">一覧に戻る</a>
+    </p>
+</form>
+</body>
+</html>

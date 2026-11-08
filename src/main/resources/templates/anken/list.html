@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>案件一覧</title>
+</head>
+<body>
+<h1>案件一覧</h1>
+<a th:href="@{/ankens/new}">新規登録</a>
+<form th:action="@{/logout}" method="post" style="display:inline;">
+    <button type="submit">ログアウト</button>
+</form>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>案件名</th>
+        <th>顧客名</th>
+        <th>ステータス</th>
+        <th>登録日</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="anken : ${ankens}">
+        <td th:text="${anken.id}"></td>
+        <td th:text="${anken.name}"></td>
+        <td th:text="${anken.customer?.name}"></td>
+        <td th:text="${anken.status}"></td>
+        <td th:text="${anken.createdDate}"></td>
+        <td>
+            <a th:href="@{/ankens/{id}/edit(id=${anken.id})}">編集</a>
+            <form th:action="@{/ankens/{id}/delete(id=${anken.id})}" method="post" style="display:inline;">
+                <button type="submit">削除</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
